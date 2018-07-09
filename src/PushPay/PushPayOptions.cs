@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PushPay {
-    public class PushPayClientOptions {
-        public PushPayClientOptions() {
+    public class PushPayOptions {
+        public PushPayOptions() {
             IsStaging = false;
         }
 
