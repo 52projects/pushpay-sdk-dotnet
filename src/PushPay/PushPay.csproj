@@ -47,8 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\QOAttribute.cs" />
+    <Compile Include="Models\Amount.cs" />
+    <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Fund.cs" />
+    <Compile Include="Models\Merchant.cs" />
     <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Payer.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\PushPayCollection.cs" />
     <Compile Include="Models\PushPayResponse.cs" />
     <Compile Include="OAuthToken.cs" />
@@ -56,10 +61,13 @@
     <Compile Include="PushPayClient.cs" />
     <Compile Include="PushPayOptions.cs" />
     <Compile Include="QueryObjects\BaseQO.cs" />
+    <Compile Include="QueryObjects\FundQO.cs" />
     <Compile Include="QueryObjects\OrganizationQO.cs" />
     <Compile Include="Sets\BaseSet.cs" />
     <Compile Include="Sets\FundSet.cs" />
+    <Compile Include="Sets\MerchantSet.cs" />
     <Compile Include="Sets\OrganizationSet.cs" />
+    <Compile Include="Sets\PaymentSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

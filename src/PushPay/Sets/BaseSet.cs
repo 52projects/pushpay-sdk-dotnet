@@ -7,6 +7,7 @@ using PushPay.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using PushPay.QueryObjects;
+using System.Web;
 
 namespace PushPay.Sets {
     public class BaseSet<T> where T : new() {
@@ -25,9 +26,16 @@ namespace PushPay.Sets {
             }
         }
 
-        internal async Task<IPushPayResponse<PushPayCollection<T>>> FindAsync(string url, BaseQO qo) {
+        internal async Task<IPushPayResponse<PushPayCollection<T>>> FindAsync(string url) {
             using (var http = CreateClient()) {
                 var response = await http.GetAsync(url);
+                return await ConvertResponseAsync<PushPayCollection<T>>(response);
+            }
+        }
+
+        internal async Task<IPushPayResponse<PushPayCollection<T>>> FindAsync(string url, BaseQO qo) {
+            using (var http = CreateClient()) {
+                var response = await http.GetAsync(BuildURLParametersString(url, qo));
                 return await ConvertResponseAsync<PushPayCollection<T>>(response);
             }
         }
@@ -55,6 +63,10 @@ namespace PushPay.Sets {
                 pushPayResponse.Data = Newtonsoft.Json.JsonConvert.DeserializeObject<S>(pushPayResponse.JsonResponse);
             }
             return pushPayResponse;
+        }
+
+        private string BuildURLParametersString(string uri, BaseQO qo) {
+            return $"{ uri}?{qo.ToQueryString()}";
         }
     }
 }

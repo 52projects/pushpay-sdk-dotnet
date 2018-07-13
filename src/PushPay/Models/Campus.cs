@@ -5,17 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PushPay.Models {
-    public class Fund {
+    public class Campus {
         public string Key { get; set; }
 
         public string Name { get; set; }
-
-        public string Code { get; set; }
-
-        public bool TaxDeductible { get; set; }
-
-        public string Notes { get; set; }
-
-        public string Status { get; set; }
     }
 }
