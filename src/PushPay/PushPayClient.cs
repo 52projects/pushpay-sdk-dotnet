@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace PushPay {
     public class PushPayClient {
@@ -137,9 +138,48 @@ namespace PushPay {
             }
         }
 
-        public static string GetGivingBaseUrl(PushPayOptions options, string handle) {
+        public static string CreatePushPayUrl(
+            PushPayOptions options, 
+            string merchantHandle, 
+            string sourceReference, 
+            string returnUrl, 
+            string payerMobilePhone = null, 
+            string fundKey = null, 
+            decimal? amount = null, 
+            string notes = null, 
+            string additionalData = null, 
+            bool fundVisibility = true, 
+            bool amountLocked = false, 
+            bool recurringSelectorVisible = true) {
             var baseUrl = options.IsStaging ? "https://sandbox.pushpay.io" : "https://pushpay.io";
-            return $"{baseUrl}/g/{handle}";
+            var sb = new StringBuilder();
+            sb.Append($"{baseUrl}/g/{merchantHandle}?sr={sourceReference}&rcv={recurringSelectorVisible.ToString().ToLower()}&ru={returnUrl}&al={amountLocked.ToString().ToLower()}");
+
+            if (!fundVisibility) {
+                sb.Append($"&fndv=hide");
+            }
+
+            if (!string.IsNullOrEmpty(payerMobilePhone)) {
+                sb.Append($"&up={payerMobilePhone}");
+            }
+
+            if (!string.IsNullOrEmpty(fundKey)) {
+                sb.Append($"&fnd={fundKey}");
+            }
+
+            if (amount.HasValue) {
+                sb.Append($"&a={amount}");
+            }
+
+            if (!string.IsNullOrEmpty(notes)) {
+                sb.Append($"&nt={notes}");
+            }
+
+            if (!string.IsNullOrEmpty(additionalData)) {
+                sb.Append($"&ad={additionalData}");
+            }
+
+            return sb.ToString();
         }
     }
 }
