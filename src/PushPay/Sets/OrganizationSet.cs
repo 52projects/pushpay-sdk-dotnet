@@ -29,5 +29,14 @@ namespace PushPay.Sets {
         public async Task<IPushPayResponse<PushPayCollection<Organization>>> InScopeAsync(OrganizationQO qo) {
             return await FindAsync($"/v1/organizations/in-scope", qo);
         }
+
+        /// <summary>
+        /// Search all organizations
+        /// </summary>
+        /// <param name="qo">A Query object to keep track of filters</param>
+        /// <returns>A collection of organizations</returns>
+        public async Task<IPushPayResponse<PushPayCollection<Organization>>> FindAsync(OrganizationQO qo) {
+            return await FindAsync($"/v1/organizations", qo);
+        }
     }
 }

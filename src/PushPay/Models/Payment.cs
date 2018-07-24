@@ -16,6 +16,8 @@ namespace PushPay.Models {
 
         public Payer Payer { get; set; }
 
+        public CreditCard Card { get; set; }
+
         public Fund Fund { get; set; }
 
         public DateTime CreatedOn { get; set; }

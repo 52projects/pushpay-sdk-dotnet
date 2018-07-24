@@ -49,6 +49,7 @@
     <Compile Include="Attributes\QOAttribute.cs" />
     <Compile Include="Models\Amount.cs" />
     <Compile Include="Models\Campus.cs" />
+    <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Fund.cs" />
     <Compile Include="Models\Merchant.cs" />
     <Compile Include="Models\Organization.cs" />

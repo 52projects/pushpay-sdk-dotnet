@@ -148,6 +148,7 @@ namespace PushPay {
             decimal? amount = null, 
             string notes = null, 
             string additionalData = null, 
+            string recurringFrequency = null,
             bool fundVisibility = true, 
             bool amountLocked = false, 
             bool recurringSelectorVisible = true) {
@@ -157,6 +158,13 @@ namespace PushPay {
 
             if (!fundVisibility) {
                 sb.Append($"&fndv=hide");
+            }
+
+            if (string.IsNullOrEmpty(recurringFrequency)) {
+                sb.Append("&r=no");
+            }
+            else {
+                sb.Append($"&r={recurringFrequency}");
             }
 
             if (!string.IsNullOrEmpty(payerMobilePhone)) {
