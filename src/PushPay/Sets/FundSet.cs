@@ -18,7 +18,7 @@ namespace PushPay.Sets {
         /// <param name="organizationKey">The organization</param>
         /// <returns>A collection of organizations that are in scope</returns>
         public async Task<IPushPayResponse<PushPayCollection<Fund>>> FindOpenAsync(string organizationKey) {
-            return await FindAsync($"/v1/organization/{organizationKey}/funds");
+            return await base.FindAsync($"/v1/organization/{organizationKey}/funds");
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace PushPay.Sets {
         /// <param name="organizationKey">The organization</param>
         /// <returns>A collection of organizations that are in scope</returns>
         public async new Task<IPushPayResponse<PushPayCollection<Fund>>> FindAsync(string merchantKey) {
-            return await FindAsync($"/v1/merchant/{merchantKey}/funds");
+            return await base.FindAsync($"/v1/merchant/{merchantKey}/funds");
         }
     }
 }
