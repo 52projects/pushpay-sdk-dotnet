@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PushPay.Models {
     public class Payment {
@@ -31,5 +32,56 @@ namespace PushPay.Models {
         public string IpAddress { get; set; }
 
         public Campus Campus { get; set; }
+
+        public List<ExternalLink> ExternalLinks { get; set; }
+
+        [JsonIgnore]
+        public int? PersonID {
+            get {
+                var value = GetAttributeValue("person_id");
+                int i = 0;
+
+                if (int.TryParse(value, out i)) {
+                    return i;
+                }
+
+                return null;
+            }
+        }
+
+        [JsonIgnore]
+        public int? ExternalTransactionID {
+            get {
+                var value = GetAttributeValue("transaction_id");
+                int i = 0;
+
+                if (int.TryParse(value, out i)) {
+                    return i;
+                }
+
+                return null;
+            }
+        }
+
+        [JsonIgnore]
+        public int? FundID {
+            get {
+                var value = GetAttributeValue("fund_id");
+                int i = 0;
+
+                if (int.TryParse(value, out i)) {
+                    return i;
+                }
+
+                return null;
+            }
+        }
+
+        private string GetAttributeValue(string relationship) {
+            if (ExternalLinks.Any(x => x.Relationship == relationship)) {
+                return ExternalLinks.First(x => x.Relationship == relationship).Value;
+            }
+            return null;
+        }
     }
 }

@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="Attributes\QOAttribute.cs" />
     <Compile Include="Models\Amount.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\CreditCard.cs" />
+    <Compile Include="Models\ExternalLink.cs" />
     <Compile Include="Models\Fund.cs" />
     <Compile Include="Models\Merchant.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="QueryObjects\BaseQO.cs" />
     <Compile Include="QueryObjects\FundQO.cs" />
     <Compile Include="QueryObjects\OrganizationQO.cs" />
+    <Compile Include="QueryObjects\PaymentQO.cs" />
     <Compile Include="Sets\BaseSet.cs" />
     <Compile Include="Sets\FundSet.cs" />
     <Compile Include="Sets\MerchantSet.cs" />

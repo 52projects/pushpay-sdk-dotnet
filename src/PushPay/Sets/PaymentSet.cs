@@ -20,5 +20,18 @@ namespace PushPay.Sets {
         public new async Task<IPushPayResponse<Payment>> GetAsync(string merchantKey, string token) {
             return await base.GetAsync($"/v1/merchant/{merchantKey}/payment/{token}");
         }
+
+        /// <summary>
+        /// Find payments based on the query provided
+        /// </summary>
+        /// <param name="qo">Query object to hold values to search</param>
+        /// <returns>Pushpay Payment Collection</returns>
+        public async Task<IPushPayResponse<PushPayCollection<Payment>>> FindAsync(PaymentQO qo) {
+            if (string.IsNullOrEmpty(qo.OrganizationKey)) {
+                throw new ArgumentException("Organization key must be provided in QO");
+            }
+
+            return await FindAsync($"/v1/organization/{qo.OrganizationKey}/payments", qo);
+        }
     }
 }
