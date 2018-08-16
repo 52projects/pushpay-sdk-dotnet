@@ -14,5 +14,8 @@ namespace PushPay.QueryObjects {
         /// </summary>
         [QO("from")]
         public DateTime? FromDate { get; set; }
+
+        [QO("updatedFrom")]
+        public DateTime? UpdatedFrom { get; set; }
     }
 }
