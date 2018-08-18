@@ -7,6 +7,7 @@ using PushPay.Attributes;
 
 namespace PushPay.QueryObjects {
     public class PaymentQO : BaseQO {
+        [QOIgnore()]
         public string OrganizationKey { get; set; }
 
         /// <summary>
