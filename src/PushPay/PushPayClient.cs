@@ -152,7 +152,7 @@ namespace PushPay {
             string fundVisibility = "show", 
             bool amountLocked = false, 
             bool recurringSelectorVisible = true) {
-            var baseUrl = options.IsStaging ? "https://sandbox.pushpay.io" : "https://pushpay.io";
+            var baseUrl = options.IsStaging ? "https://sandbox.pushpay.io" : "https://pushpay.com";
             var sb = new StringBuilder();
             sb.Append($"{baseUrl}/g/{merchantHandle}?sr={sourceReference}&fndv={fundVisibility.ToLower()}&rcv={recurringSelectorVisible.ToString().ToLower()}&ru={returnUrl}&al={amountLocked.ToString().ToLower()}");
 

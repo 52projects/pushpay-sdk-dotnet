@@ -55,7 +55,7 @@ namespace PushPay.Sets {
                 JsonResponse = await response.Content.ReadAsStringAsync()
             };
 
-            if (!string.IsNullOrEmpty(pushPayResponse.JsonResponse) && pushPayResponse.JsonResponse.Contains("error")) {
+            if (!string.IsNullOrEmpty(pushPayResponse.JsonResponse) && (int)response.StatusCode > 300) {
                 var responseError = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(pushPayResponse.JsonResponse);
                 pushPayResponse.ErrorMessage = responseError.error_message;
             }
