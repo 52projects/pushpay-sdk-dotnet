@@ -25,7 +25,7 @@ namespace PushPay.Models {
 
         public DateTime UpdatedOn { get; set; }
 
-        public string Data { get; set; }
+        public dynamic Data { get; set; }
 
         public string PaymentMethodType { get; set; }
 
