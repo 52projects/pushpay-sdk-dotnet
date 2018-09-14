@@ -25,9 +25,13 @@ namespace PushPay.Models {
 
         public DateTime UpdatedOn { get; set; }
 
+        public string Data { get; set; }
+
         public string PaymentMethodType { get; set; }
 
         public string Source { get; set; }
+
+        public string SourceReference { get; set; }
 
         public string IpAddress { get; set; }
 
@@ -78,7 +82,7 @@ namespace PushPay.Models {
         }
 
         private string GetAttributeValue(string relationship) {
-            if (ExternalLinks.Any(x => x.Relationship == relationship)) {
+            if (ExternalLinks != null && ExternalLinks.Any(x => x.Relationship == relationship)) {
                 return ExternalLinks.First(x => x.Relationship == relationship).Value;
             }
             return null;
