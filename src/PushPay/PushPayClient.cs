@@ -15,6 +15,7 @@ namespace PushPay {
         private readonly PaymentSet _payments;
 
         public PushPayClient(PushPayOptions options, OAuthToken token) {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             _organizations = new OrganizationSet(options, token);
             _funds = new FundSet(options, token);
             _merchants = new MerchantSet(options, token);
@@ -71,6 +72,7 @@ namespace PushPay {
         /// <param name="state">Any specific parameters that need to be sent back from pushpay</param>
         /// <returns>An OAuth Token object to use for subsequent requests</returns>
         public static async Task<IPushPayResponse<OAuthToken>> RequestAccessTokenAsync(PushPayOptions options, string returnUrl, string code, string state = null) {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             using (var httpClient = new HttpClient()) {
                 var toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes($"{options.ClientID}:{options.ClientSecret}");
 
@@ -106,6 +108,7 @@ namespace PushPay {
         }
 
         public static async Task<IPushPayResponse<OAuthToken>> RefreshAccessTokenAsync(PushPayOptions options, string refreshToken) {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             using (var httpClient = new HttpClient()) {
                 var toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes($"{options.ClientID}:{options.ClientSecret}");
 
