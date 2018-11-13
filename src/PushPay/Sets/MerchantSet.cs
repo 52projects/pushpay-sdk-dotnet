@@ -20,8 +20,8 @@ namespace PushPay.Sets {
             return await FindAsync($"/v1/merchants/in-scope");
         }
 
-        public async new Task<IPushPayResponse<PushPayCollection<Merchant>>> FindAsync(string organizationKey) {
-            return await base.FindAsync($"/v1/organization/{organizationKey}/merchantlistings");
+        public async new Task<IPushPayResponse<PushPayCollection<Merchant>>> FindAsync(string organizationKey, string visibility) {
+            return await base.FindAsync($"/v1/organization/{organizationKey}/merchantlistings?visibility={visibility}");
         }
 
         /// <summary>
