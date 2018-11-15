@@ -65,6 +65,7 @@
     <Compile Include="PushPayOptions.cs" />
     <Compile Include="QueryObjects\BaseQO.cs" />
     <Compile Include="QueryObjects\FundQO.cs" />
+    <Compile Include="QueryObjects\MerchantQO.cs" />
     <Compile Include="QueryObjects\OrganizationQO.cs" />
     <Compile Include="QueryObjects\PaymentQO.cs" />
     <Compile Include="Sets\BaseSet.cs" />
