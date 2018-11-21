@@ -19,6 +19,12 @@ namespace PushPay.QueryObjects {
         [QO("updatedFrom")]
         public DateTime? UpdatedFrom { get; set; }
 
+        [QO("createdFrom")]
+        public DateTime? CreatedFrom { get; set; }
+
+        [QO("createdTo")]
+        public DateTime? CreatedTo { get; set; }
+
         [QO("updatedTo")]
         public DateTime? UpdatedTo { get; set; }
     }
