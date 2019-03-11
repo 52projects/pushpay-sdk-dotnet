@@ -110,34 +110,39 @@ namespace PushPay {
         public static async Task<IPushPayResponse<OAuthToken>> RefreshAccessTokenAsync(PushPayOptions options, string refreshToken) {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
             using (var httpClient = new HttpClient()) {
-                var toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes($"{options.ClientID}:{options.ClientSecret}");
+                try {
+                    var toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes($"{options.ClientID}:{options.ClientSecret}");
 
-                var content = new FormUrlEncodedContent(new[]
-                {
+                    var content = new FormUrlEncodedContent(new[]
+                    {
                     new KeyValuePair<string, string>("grant_type", "refresh_token"),
                     new KeyValuePair<string, string>("refresh_token", refreshToken),
                 });
 
-                var url = new Uri(options.IsStaging ? "https://auth.pushpay.com/pushpay-sandbox" : "https://auth.pushpay.com/pushpay");
+                    var url = new Uri(options.IsStaging ? "https://auth.pushpay.com/pushpay-sandbox" : "https://auth.pushpay.com/pushpay");
 
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(toEncodeAsBytes, 0, toEncodeAsBytes.Length));
-                var response = await httpClient.PostAsync($"{url}/oauth/token", content);
-                var responseContent = await response.Content.ReadAsStringAsync();
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(toEncodeAsBytes, 0, toEncodeAsBytes.Length));
+                    var response = await httpClient.PostAsync($"{url}/oauth/token", content);
+                    var responseContent = await response.Content.ReadAsStringAsync();
 
-                var pushPayResponse = new PushPayResponse<OAuthToken> {
-                    StatusCode = response.StatusCode,
-                    RequestValue = Newtonsoft.Json.JsonConvert.SerializeObject(content)
-                };
+                    var pushPayResponse = new PushPayResponse<OAuthToken> {
+                        StatusCode = response.StatusCode,
+                        RequestValue = Newtonsoft.Json.JsonConvert.SerializeObject(content)
+                    };
 
-                if (!string.IsNullOrEmpty(responseContent) && responseContent.Contains("error")) {
-                    var responseError = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseContent);
-                    pushPayResponse.ErrorMessage = responseError.error_message;
+                    if (!string.IsNullOrEmpty(responseContent) && responseContent.Contains("error")) {
+                        var responseError = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseContent);
+                        pushPayResponse.ErrorMessage = responseError.error_message;
+                    }
+                    else {
+                        pushPayResponse.Data = Newtonsoft.Json.JsonConvert.DeserializeObject<OAuthToken>(responseContent);
+                    }
+
+                    return pushPayResponse;
                 }
-                else {
-                    pushPayResponse.Data = Newtonsoft.Json.JsonConvert.DeserializeObject<OAuthToken>(responseContent);
+                catch (Exception e) {
+                    return null;
                 }
-
-                return pushPayResponse;
             }
         }
 
