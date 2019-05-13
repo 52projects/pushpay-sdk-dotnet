@@ -9,7 +9,7 @@ namespace PushPay.Models {
     public class Payment {
         public string Status { get; set; }
 
-        public int TransactionID { get; set; }
+        public long TransactionID { get; set; }
 
         public string PaymentToken { get; set; }
 

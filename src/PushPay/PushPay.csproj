@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Attributes\QOAttribute.cs" />
     <Compile Include="Models\Amount.cs" />
+    <Compile Include="Models\AmountDetails.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\CreditCard.cs" />
