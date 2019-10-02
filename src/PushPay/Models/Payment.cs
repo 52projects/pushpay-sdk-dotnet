@@ -17,7 +17,7 @@ namespace PushPay.Models {
 
         public Payment RefundedBy { get; set; }
 
-        public Payment RefundedFor { get; set; }
+        public Payment RefundFor { get; set; }
 
         public Payer Payer { get; set; }
 
