@@ -15,6 +15,10 @@ namespace PushPay.Models {
 
         public AmountLookup Amount { get; set; }
 
+        public Payment RefundedBy { get; set; }
+
+        public Payment RefundedFor { get; set; }
+
         public Payer Payer { get; set; }
 
         public CreditCard Card { get; set; }
@@ -38,6 +42,9 @@ namespace PushPay.Models {
         public Campus Campus { get; set; }
 
         public List<ExternalLink> ExternalLinks { get; set; }
+
+        [JsonProperty(PropertyName = "_links")]
+        public PaymentLinks Links { get; set; }
 
         [JsonIgnore]
         public int? PersonID {
@@ -87,5 +94,11 @@ namespace PushPay.Models {
             }
             return null;
         }
+    }
+
+    public class PaymentLinks {
+        public Link Self { get; set; }
+
+        public Link MerchantViewPayment { get; set; }
     }
 }
